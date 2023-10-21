@@ -2,7 +2,9 @@ const axios = require('axios');
 require('dotenv').config();
 
 const key = process.env.MY_KEY;
-const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-US&page=1&sort_by=popularity.asc'
+const language = 'pt'
+const firstLetter = 'A'
+const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=${language}-US&page=1&sort_by=popularity.desc`
 
 const headers = {
   Accept: 'application/json',
@@ -17,13 +19,11 @@ const getMovies = async () => {
 
     const movieList = response.data.results
       .map(movie => movie.title)
-      .filter(movie => movie[0].toLowerCase() === 'a');
+      .filter(movie => movie[0].toLowerCase() === firstLetter.toLowerCase());
   
     console.log(movieList)
   } catch (error) {
     console.error('Erro!', error.message);
-  } finally {
-    console.log('Eu só queria usar o \'finally\'');
   }
 }
 
