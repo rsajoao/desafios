@@ -1,7 +1,8 @@
 const axios = require('axios');
+require('dotenv').config();
 
-const key = ''
-const url = ''
+const key = process.env.MY_KEY;
+const url = 'https://api.themoviedb.org/3/authentication'
 
 const headers = {
   Accept: 'application/json',
@@ -13,7 +14,7 @@ const config = { method: 'get', url, headers }
 const getMovies = async () => {
   try {
     const response = await axios(config);
-    console.log(response.data.results)
+    console.log(response.status)
   } catch (error) {
     console.error('Erro!', error.message);
   } finally {
